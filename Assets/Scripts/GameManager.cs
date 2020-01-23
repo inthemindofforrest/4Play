@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Manager;
 
     public int Score;
+    public GameObject Player;
 
     int HiddenNum = 0;
     public int CameraLocationPoint
