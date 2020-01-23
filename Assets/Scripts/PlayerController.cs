@@ -21,21 +21,28 @@ public class PlayerController : MonoBehaviour
         // set the players hight above the current floor and canges the players rotation based on the cameras rotation
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, 10.0f))
-        {
-            transform.position = hit.point + new Vector3(0, floatHight, 0);
-            lastHit = transform.position;
-            Vector3 playerRotation = transform.rotation.eulerAngles;
-            Vector3 camerRotation = Camera.rotation.eulerAngles;
-            Quaternion newRot = new Quaternion();
-            if (left)
+        {               
+            if (hit.collider.gameObject.tag == "Floor")
             {
-                newRot.eulerAngles = new Vector3(playerRotation.x, camerRotation.y + flip.y, playerRotation.z);
-                transform.rotation = newRot;
+                transform.position = hit.point + new Vector3(0, floatHight, 0);
+                lastHit = transform.position;
+                Vector3 playerRotation = transform.rotation.eulerAngles;
+                Vector3 camerRotation = Camera.rotation.eulerAngles;
+                Quaternion newRot = new Quaternion();
+                if (left)
+                {
+                    newRot.eulerAngles = new Vector3(playerRotation.x, camerRotation.y + flip.y, playerRotation.z);
+                    transform.rotation = newRot;
+                }
+                else
+                {
+                    newRot.eulerAngles = new Vector3(playerRotation.x, camerRotation.y, playerRotation.z);
+                    transform.rotation = newRot;
+                }
             }
             else
             {
-                newRot.eulerAngles = new Vector3(playerRotation.x, camerRotation.y, playerRotation.z);
-                transform.rotation = newRot;
+                transform.position = lastHit;
             }
         }
         else
