@@ -1,9 +1,10 @@
-PLayer controller
+Player controller
 	-Movement
-	-Attack
+	-Attack (Insense burner)
 	-Health
 Camera
-	-Movement - Pan
+	-Movement 
+		-
 Children...
 	-Movement (Towards player)
 	-Touch (Attack)
