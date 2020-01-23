@@ -38,12 +38,13 @@ public class Children : MonoBehaviour
 
     private void Update()
     {
-        Agent.destination = Target.transform.position;
+        if(!Ragdolling)
+            Agent.destination = Target.transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(Ragdolling)
+        if(Ragdolling && collision.gameObject.tag == "StaticObject")
         {
             print("EXPLODE");
             Destroy(gameObject);
@@ -51,7 +52,7 @@ public class Children : MonoBehaviour
         }
         if(collision.gameObject.tag == "Melee")
         {
-            print("Hit " + (transform.position - collision.transform.position).normalized * 20);
+            Agent.enabled = false;
             //Ragdoll
             Ragdolling = true;
 
