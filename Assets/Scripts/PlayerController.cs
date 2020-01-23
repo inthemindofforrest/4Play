@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
         {               
             if (hit.collider.gameObject.tag == "Floor")
             {
-                Debug.Log(hit.collider.gameObject.name);
                 transform.position = hit.point + new Vector3(0, floatHight, 0);
                 lastHit = transform.position;
                 Vector3 playerRotation = transform.rotation.eulerAngles;
