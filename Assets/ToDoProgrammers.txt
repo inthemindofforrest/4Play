@@ -1,0 +1,11 @@
+PLayer controller
+	-Movement
+	-Attack
+	-Health
+Camera
+	-Movement - Pan
+Children...
+	-Movement (Towards player)
+	-Touch (Attack)
+	
+
