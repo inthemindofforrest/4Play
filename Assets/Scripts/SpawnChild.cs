@@ -6,11 +6,39 @@ public class SpawnChild : MonoBehaviour
 {
     GameManager Manager;
     public GameObject Child;
-    DIRECTION Direction;
 
-    SpawnChild(DIRECTION _direction)
+    public void SetDirection(DIRECTION _direction)
     {
-        Direction = _direction;
+        transform.LookAt(transform.position + FacingDirection(_direction));
+    }
+
+    public static void CreateChild(GameObject _ObjectToSpawn, Transform _Parent, Vector3 _Location, DIRECTION _FacingDirection)
+    {
+        GameObject TempChildSpawner = Instantiate(_ObjectToSpawn, _Parent);
+        TempChildSpawner.GetComponent<SpawnChild>().SetDirection(_FacingDirection);
+    }
+
+    public Vector3 FacingDirection(DIRECTION _direction)
+    {
+        Vector3 Dir = Vector3.zero;
+
+        switch (_direction)
+        {
+            case DIRECTION.Forward:
+                Dir = Vector3.forward;
+                break;
+            case DIRECTION.Backward:
+                Dir = -Vector3.forward;
+                break;
+            case DIRECTION.Right:
+                Dir = Vector3.right;
+                break;
+            case DIRECTION.Left:
+                Dir = -Vector3.right;
+                break;
+        }
+
+        return Dir;
     }
 
     public void OnEnable()
