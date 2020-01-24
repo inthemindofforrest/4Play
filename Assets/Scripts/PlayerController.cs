@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Animator Anim;
+
     public float Speed;
     private Vector3 posChange = new Vector3(0, 0, 0);
     public Transform Camera;
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Manager = GameManager.Manager;
+
     }
 
 
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
         //moves the player based off of wasd
         if (Input.GetKey(KeyCode.A))
         {
+            Anim.SetBool("Walking", true);
             if (!left)
             {
                 transform.Rotate(flip);
@@ -69,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
+            Anim.SetBool("Walking", true);
             if (left)
             {
                 transform.Rotate(flip);
@@ -83,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
+            Anim.SetBool("Walking", true);
             if (left)
             {
                 posChange += (-transform.forward);
@@ -95,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S))
         {
+            Anim.SetBool("Walking", true);
             if (left)
             {
                 posChange += (transform.forward);
@@ -104,7 +111,10 @@ public class PlayerController : MonoBehaviour
                 posChange += (-transform.forward);
             }
         }
-
+        if(!(Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.D)))
+        {
+            Anim.SetBool("Walking", false);
+        }
         transform.position += (posChange.normalized * Speed * Time.deltaTime);
         posChange = new Vector3(0, 0, 0);
 

@@ -14,6 +14,7 @@ public class ChildSpawning : MonoBehaviour
     public ENTRANCES Entrance;
     public DIRECTION Direction;
 
+    public int MaxTimerRate = 3;
     public float Timer = 0;
 
     RaycastHit Hit;
@@ -29,7 +30,7 @@ public class ChildSpawning : MonoBehaviour
         Timer -= Time.deltaTime;
         if ((Input.GetKeyDown(KeyCode.P) || Timer <= 0) && SectionNumber == Manager.CameraLocationPoint)
         {
-            Timer = 3;
+            Timer = MaxTimerRate;
             SpawnChildren();
         }
     }
