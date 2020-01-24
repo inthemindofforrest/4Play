@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Manager;
-
+    public GameObject deathScreen;
     public int Score = 0;
     public int health = 2;
     public GameObject Player;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         if (Manager == null)
             Manager = this;
         else
@@ -36,8 +37,9 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        deathScreen.SetActive(true);
         print("Game Reset");
         Score = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
