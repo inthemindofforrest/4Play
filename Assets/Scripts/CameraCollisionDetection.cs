@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraCollisionDetection : MonoBehaviour
 {
     GameManager Manager;
+    public int CameraSync = 0;
     public int LocationPointAmount = 0;
 
     private void Start()
@@ -15,7 +16,7 @@ public class CameraCollisionDetection : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print(collision.gameObject.tag);
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && Manager.CameraLocationPoint == CameraSync)
         {
             Manager.CameraLocationPoint += LocationPointAmount;
         }
