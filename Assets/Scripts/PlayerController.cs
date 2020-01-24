@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
+    GameManager Manager;
+
+    NavMeshAgent Agent;
+    NavMeshHit NHit;
+    
     public float Speed;
     private Vector3 posChange = new Vector3(0,0,0);
     public Transform Camera;
@@ -12,7 +18,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 flip = new Vector3(0, 180, 0);
     private Vector3 lastHit = new Vector3();
     void Start()
-    {          
+    {
+        Manager = GameManager.Manager;
+        if (NavMesh.SamplePosition(transform.position, out NHit, 500, 1))
+        {
+            transform.position = NHit.position;
+            Agent = gameObject.AddComponent<NavMeshAgent>();
+        }
+        Agent = GetComponent<NavMeshAgent>();
+        Agent.speed = Speed;
     }
 
     
@@ -24,7 +38,7 @@ public class PlayerController : MonoBehaviour
         {               
             if (hit.collider.gameObject.tag == "Floor")
             {
-                transform.position = hit.point + new Vector3(0, floatHight, 0);
+                //transform.position = hit.point + new Vector3(0, floatHight, 0);
                 lastHit = transform.position;
                 Vector3 playerRotation = transform.rotation.eulerAngles;
                 Vector3 camerRotation = Camera.rotation.eulerAngles;
@@ -40,10 +54,10 @@ public class PlayerController : MonoBehaviour
                     transform.rotation = newRot;
                 }
             }
-            else
-            {
-                transform.position = lastHit;
-            }
+            //else
+            //{
+            //    transform.position = lastHit;
+            //}
         }
         else
         {
@@ -102,9 +116,19 @@ public class PlayerController : MonoBehaviour
                 posChange += (-transform.forward);
             }
         }
-        
-        transform.position += (posChange.normalized * Speed * Time.deltaTime);
+
+        print("PLayer Destination: " + transform.position + (posChange.normalized * Speed ));
+        Agent.SetDestination(transform.position + (posChange.normalized * Speed * Time.deltaTime));
         posChange = new Vector3(0, 0, 0);
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            print("Collided with Enemy");
+            Manager.ResetGame();
+        }
     }
 }

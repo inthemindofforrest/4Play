@@ -10,8 +10,7 @@ public class CameraController : MonoBehaviour
     public int DistanceFromTarget = 1;
     public Transform Target;
 
-    Vector3 LeftLock;
-    Vector3 RightLock;
+    public int SideLock = 10;
 
     public bool UpdateLoc = false;
 
@@ -25,7 +24,10 @@ public class CameraController : MonoBehaviour
     {
         //if(UpdateLoc)
         //{
-        transform.position = Vector3.Lerp(transform.position, Manager.CameraLocations[Manager.CameraLocationPoint].position, 1 * Time.deltaTime);
+        Vector3 TempCameraPos = Manager.CameraLocations[Manager.CameraLocationPoint].position;
+        Vector3 NewCameraPos = TempCameraPos + new Vector3(0, 0, Mathf.Clamp(Manager.Player.transform.position.z - TempCameraPos.z, -SideLock, SideLock));
+
+        transform.position = Vector3.Lerp(transform.position, NewCameraPos, 1 * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, Manager.CameraLocations[Manager.CameraLocationPoint].rotation, 1 * Time.deltaTime);
         if (Input.GetKeyDown(KeyCode.Space))
         {

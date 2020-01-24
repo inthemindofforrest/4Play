@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Manager;
 
-    public int Score;
+    public int Score = 0;
     public GameObject Player;
 
     int HiddenNum = 0;
@@ -29,5 +30,12 @@ public class GameManager : MonoBehaviour
             Manager = this;
         else
             Destroy(gameObject);
+    }
+
+    public void ResetGame()
+    {
+        print("Game Reset");
+        Score = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
