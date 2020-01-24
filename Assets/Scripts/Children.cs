@@ -13,7 +13,7 @@ public class Children : MonoBehaviour
     public GameObject Target;
     NavMeshAgent TargetAgent;
 
-    bool Ragdolling = false;
+    public bool Ragdolling = false;
     Rigidbody RB;
     RaycastHit Hit;
 

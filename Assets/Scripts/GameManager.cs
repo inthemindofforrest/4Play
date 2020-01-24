@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Manager;
 
     public int Score = 0;
+    public int health = 2;
     public GameObject Player;
 
     public int HiddenNum = 0;
