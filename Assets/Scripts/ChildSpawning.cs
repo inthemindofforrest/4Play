@@ -33,7 +33,22 @@ public class ChildSpawning : MonoBehaviour
 
     void SpawnChildren()
     {
-        SpawnChild.CreateChild(ToSpawn, transform.parent, transform.position, Direction);
+        GameObject ChildToBeSpawned = SpawnChild.CreateChild(ToSpawn, transform.parent, transform.position, Direction);
+        switch (Direction)
+        {
+            case DIRECTION.Forward:
+                ChildToBeSpawned.transform.LookAt(transform.position + Vector3.right);
+                break;
+            case DIRECTION.Backward:
+                ChildToBeSpawned.transform.LookAt(transform.position + -Vector3.right);
+                break;
+            case DIRECTION.Right:
+                ChildToBeSpawned.transform.LookAt(transform.position + -Vector3.forward);
+                break;
+            case DIRECTION.Left:
+                ChildToBeSpawned.transform.LookAt(transform.position + Vector3.forward);
+                break;
+        }
     }
     void LookInCorrectDirection()
     {
