@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         // set the players hight above the current floor and canges the players rotation based on the cameras rotation
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 10.0f))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, 20.0f))
         {
             if (hit.collider.gameObject.tag == "Floor")
             {
