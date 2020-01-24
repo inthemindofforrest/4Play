@@ -22,10 +22,6 @@ public class SpawnChild : MonoBehaviour
         TempChildSpawner.transform.GetChild(0).GetComponent<SpawnChild>().SetDirection(_FacingDirection);
         return TempChildSpawner;
     }
-    private void Start()
-    {
-        transform.LookAt(transform.position + FacingDirection(Dir));
-    }
 
     public Vector3 FacingDirection(DIRECTION _direction)
     {
