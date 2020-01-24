@@ -14,6 +14,8 @@ public class ChildSpawning : MonoBehaviour
     public ENTRANCES Entrance;
     public DIRECTION Direction;
 
+    public float Timer = 0;
+
     RaycastHit Hit;
 
     private void Start()
@@ -24,9 +26,10 @@ public class ChildSpawning : MonoBehaviour
 
     private void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.P) && SectionNumber == Manager.CameraLocationPoint)
+        Timer -= Time.deltaTime;
+        if ((Input.GetKeyDown(KeyCode.P) || Timer <= 0) && SectionNumber == Manager.CameraLocationPoint)
         {
+            Timer = 3;
             SpawnChildren();
         }
     }
