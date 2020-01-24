@@ -59,7 +59,7 @@ public class Children : MonoBehaviour
             Ragdolling = true;
 
             //Add Force from hit
-            RB.AddForce(((transform.position - collision.transform.position).normalized + new Vector3(0,.1f,0)) * 1000); //:)
+            RB.AddForce(((transform.position - collision.transform.position).normalized + new Vector3(0,.1f,0)) * 5000); //:)
         }
     }
 }

@@ -12,19 +12,10 @@ public class CameraCollisionDetection : MonoBehaviour
     {
         Manager = GameManager.Manager;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        print(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Player" && Manager.CameraLocationPoint == CameraSync)
-        {
-            Manager.CameraLocationPoint += LocationPointAmount;
-        }
-    }
     private void OnTriggerEnter(Collider other)
     {
         print(other.gameObject.tag + " Trigger");
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && Manager.CameraLocationPoint == CameraSync)
         {
             Manager.CameraLocationPoint += LocationPointAmount;
         }
