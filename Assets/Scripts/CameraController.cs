@@ -22,10 +22,11 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        //if(UpdateLoc)
-        //{
         Vector3 TempCameraPos = Manager.CameraLocations[Manager.CameraLocationPoint].position;
-        Vector3 NewCameraPos = TempCameraPos + new Vector3(0, 0, Mathf.Clamp(Manager.Player.transform.position.z - TempCameraPos.z, -SideLock, SideLock));
+
+        Vector3 NewCameraPos = TempCameraPos + ((Mathf.Abs(transform.forward.x) > Mathf.Abs(transform.forward.z))? 
+            new Vector3(0, 0, Mathf.Clamp(Manager.Player.transform.position.z - TempCameraPos.z, -SideLock, SideLock)) :
+            new Vector3(Mathf.Clamp(Manager.Player.transform.position.x - TempCameraPos.x, -SideLock, SideLock), 0, 0));
 
         transform.position = Vector3.Lerp(transform.position, NewCameraPos, 1 * Time.deltaTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, Manager.CameraLocations[Manager.CameraLocationPoint].rotation, 1 * Time.deltaTime);
@@ -40,6 +41,5 @@ public class CameraController : MonoBehaviour
             else
                 Manager.CameraLocationPoint = 0;
         }
-        //}
     }
 }

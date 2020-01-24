@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     public int health = 2;
     public GameObject Player;
 
-
-    int HiddenNum = 0;
+    public int HiddenNum = 0;
     public int CameraLocationPoint
     {
         set
