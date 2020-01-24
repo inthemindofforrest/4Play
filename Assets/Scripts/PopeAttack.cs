@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class PopeAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject WinScreen;
+    bool OnFloor = false;
+    Children ChildInsidePope;
+
+    private void Start()
     {
-        
+        ChildInsidePope = GetComponent<Children>();
+    }
+    private void Update()
+    {
+        if(OnFloor)
+        {
+            ChildInsidePope.enabled = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.tag == "Melee")
+        {
+            print("WIN!!!!!!!!!!!!!!!!!!");
+            WinScreen.SetActive(true);
+            GameManager.Manager.health = int.MaxValue;
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapons : MonoBehaviour
 {
     private Animation anim;
+    public Animator Anim;
     public GameObject explosion;
     private bool boom = false;
     private bool charged = false;
@@ -21,9 +22,12 @@ public class Weapons : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Anim.SetBool("Swing", false);
+        Anim.SetBool("AOE", false);
         if (Input.GetMouseButtonDown(0))
         {
             anim.Play("TestSwing");
+            Anim.SetBool("Swing", true);
             Debug.Log("left");
         }
         if (Manager.Score >= lastBlast + chargeAmount)
@@ -36,6 +40,7 @@ public class Weapons : MonoBehaviour
             boom = true;
             charged = false;
             lastBlast = Manager.Score;
+            Anim.SetBool("AOE", true);
             Debug.Log("Right");
         }
         if (boom)
