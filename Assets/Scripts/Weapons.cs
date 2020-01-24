@@ -7,11 +7,15 @@ public class Weapons : MonoBehaviour
     private Animation anim;
     public GameObject explosion;
     private bool boom = false;
+    private bool charged = false;
+    public int chargeAmount;
+    GameManager Manager;
+    private int lastBlast = 0;
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animation>();
-        
+        Manager = GameManager.Manager;
     }
 
     // Update is called once per frame
@@ -22,10 +26,16 @@ public class Weapons : MonoBehaviour
             anim.Play("TestSwing");
             Debug.Log("left");
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Manager.Score >= lastBlast + chargeAmount)
+        {
+            charged = true;
+        }
+        if (Input.GetMouseButtonDown(1) && charged)
         {
             explosion.SetActive(true);
             boom = true;
+            charged = false;
+            lastBlast = Manager.Score;
             Debug.Log("Right");
         }
         if (boom)
