@@ -14,8 +14,10 @@ public class SpawnChild : MonoBehaviour
 
     public static void CreateChild(GameObject _ObjectToSpawn, Transform _Parent, Vector3 _Location, DIRECTION _FacingDirection)
     {
-        GameObject TempChildSpawner = Instantiate(_ObjectToSpawn, _Parent);
-        TempChildSpawner.GetComponent<SpawnChild>().SetDirection(_FacingDirection);
+        GameObject TempChildSpawner = Instantiate(_ObjectToSpawn, _Location, Quaternion.identity);
+        TempChildSpawner.transform.position = _Location;
+        print(TempChildSpawner.name + " Location: " + TempChildSpawner.transform.position);
+        TempChildSpawner.transform.GetChild(0).GetComponent<SpawnChild>().SetDirection(_FacingDirection);
     }
 
     public Vector3 FacingDirection(DIRECTION _direction)
@@ -47,9 +49,9 @@ public class SpawnChild : MonoBehaviour
 
 
 
-        GameObject TempChild = Instantiate(Child, transform.parent);
+        GameObject TempChild = Instantiate(Child, transform.parent.parent);
         TempChild.GetComponent<Children>().Target = Manager.Player;
         TempChild.transform.position = transform.GetChild(0).transform.position;
-        Destroy(transform.GetChild(0).gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

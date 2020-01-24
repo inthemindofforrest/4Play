@@ -6,6 +6,7 @@ public enum DIRECTION { Forward,Backward,Left,Right};
 public class ChildSpawning : MonoBehaviour
 {
     public enum ENTRANCES{ ClimbThroughWindow, ClimbBuilding, Fall};
+    GameManager Manager;
 
     public GameObject ToSpawn;
 
@@ -17,12 +18,14 @@ public class ChildSpawning : MonoBehaviour
 
     private void Start()
     {
+        Manager = GameManager.Manager;
         LookInCorrectDirection();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+
+        if(Input.GetKeyDown(KeyCode.P) && SectionNumber == Manager.CameraLocationPoint)
         {
             SpawnChildren();
         }

@@ -53,6 +53,7 @@ public class Children : MonoBehaviour
         if(collision.gameObject.tag == "Melee")
         {
             Agent.enabled = false;
+            Agent.gameObject.AddComponent<NavMeshObstacle>();
             //Ragdoll
             Ragdolling = true;
 
